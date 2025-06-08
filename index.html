@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JamStep - Move-to-Earn Ecosystem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --dark-bg: #0a0a18;
+            --electric-blue: #1CA7EC;
+            --neon-glow: 0 0 10px rgba(28, 167, 236, 0.3);
+            --neon-hover: 0 0 15px rgba(28, 167, 236, 0.6);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto Condensed', sans-serif;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+        
+        body {
+            background: var(--dark-bg);
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: rgba(10, 10, 24, 0.95);
+            padding: 1.2rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(28, 167, 236, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--electric-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover img {
+            transform: rotate(5deg);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--electric-blue);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: radial-gradient(circle at center, rgba(28, 167, 236, 0.1) 0%, transparent 70%);
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 700px;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            text-shadow: var(--neon-glow);
+        }
+        
+        .hero-highlight {
+            color: var(--electric-blue);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { text-shadow: 0 0 10px rgba(28, 167, 236, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(28, 167, 236, 0.8); }
+            100% { text-shadow: 0 0 10px rgba(28, 167, 236, 0.5); }
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 90%;
+            color: #c7d2fe;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: transparent;
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            border: 2px solid var(--electric-blue);
+            box-shadow: var(--neon-glow);
+            margin-right: 15px;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(28, 167, 236, 0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover {
+            background: rgba(28, 167, 236, 0.15);
+            transform: translateY(-3px);
+            box-shadow: var(--neon-hover);
+        }
+        
+        .btn:hover:before {
+            left: 100%;
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        /* Problem & Solution Section */
+        .problem-solution {
+            padding: 8rem 0;
+            background: rgba(255, 255, 255, 0.03);
+        }
+        
+        .ps-container {
+            display: flex;
+            gap: 3rem;
+        }
+        
+        .problem, .solution {
+            flex: 1;
+            padding: 2.5rem;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+        }
+        
+        .problem {
+            background: rgba(255, 100, 100, 0.1);
+            border: 1px solid rgba(255, 100, 100, 0.3);
+        }
+        
+        .solution {
+            background: rgba(100, 255, 100, 0.1);
+            border: 1px solid rgba(100, 255, 100, 0.3);
+        }
+        
+        .problem:hover, .solution:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--neon-glow);
+        }
+        
+        .problem h2, .solution h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--electric-blue);
+        }
+        
+        .problem h2 i, .solution h2 i {
+            margin-right: 10px;
+        }
+        
+        /* Advantages Section */
+        .advantages {
+            padding: 8rem 0;
+        }
+        
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .advantage-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(28, 167, 236, 0.2);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        
+        .advantage-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--electric-blue);
+            box-shadow: var(--neon-glow);
+        }
+        
+        .advantage-icon {
+            font-size: 3rem;
+            color: var(--electric-blue);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .advantage-card:hover .advantage-icon {
+            transform: scale(1.2);
+        }
+        
+        .advantage-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        /* Founder Section */
+        .founder {
+            padding: 8rem 0;
+            background: rgba(255, 255, 255, 0.03);
+        }
+        
+        .founder-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .founder-image {
+            flex: 1;
+            border: 3px solid var(--electric-blue);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: var(--neon-glow);
+        }
+        
+        .founder-image:hover {
+            transform: scale(1.03);
+            box-shadow: var(--neon-hover);
+        }
+        
+        .founder-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .founder-text {
+            flex: 1;
+        }
+        
+        .founder-text h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--electric-blue);
+        }
+        
+        .founder-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .founder-quote {
+            border-left: 3px solid var(--electric-blue);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            font-size: 1.2rem;
+            position: relative;
+        }
+        
+        .founder-quote:before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            font-size: 4rem;
+            color: rgba(28, 167, 236, 0.2);
+            font-family: serif;
+        }
+        
+        /* Whitepaper Section */
+        .whitepaper {
+            padding: 8rem 0;
+            background: rgba(255, 255, 255, 0.03);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--electric-blue);
+        }
+        
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .data-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(28, 167, 236, 0.2);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        
+        .data-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--electric-blue);
+            box-shadow: var(--neon-glow);
+        }
+        
+        .data-card h3 {
+            font-size: 1.8rem;
+            color: var(--electric-blue);
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .investor-note {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 1.5rem;
+            background: rgba(28, 167, 236, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.1rem;
+            border-left: 3px solid var(--electric-blue);
+            transition: all 0.4s ease;
+        }
+        
+        .investor-note:hover {
+            transform: scale(1.02);
+            box-shadow: var(--neon-glow);
+        }
+        
+        /* Tokenomics */
+        .tokenomics {
+            padding: 8rem 0;
+        }
+        
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+        
+        .chart-wrapper {
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .chart-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(28, 167, 236, 0.2);
+            transition: all 0.4s ease;
+        }
+        
+        .chart-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--electric-blue);
+            box-shadow: var(--neon-glow);
+        }
+        
+        /* Roadmap */
+        .roadmap {
+            padding: 8rem 0;
+            background: rgba(255, 255, 255, 0.03);
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 3rem auto 0;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--electric-blue), transparent);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 1.5rem 2.5rem;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 8px;
+            position: relative;
+            border: 1px solid rgba(28, 167, 236, 0.2);
+            transition: all 0.4s ease;
+        }
+        
+        .timeline-content:hover {
+            transform: translateX(10px);
+            border-color: var(--electric-blue);
+            box-shadow: var(--neon-glow);
+        }
+        
+        .timeline-content h3 {
+            color: var(--electric-blue);
+            margin-bottom: 0.8rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .timeline-date {
+            background: var(--electric-blue);
+            color: white;
+            padding: 0.3rem 1.5rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: var(--neon-glow);
+        }
+        
+        /* Contact */
+        .contact {
+            padding: 8rem 0;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .social-link {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            border: 2px solid var(--electric-blue);
+            box-shadow: var(--neon-glow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-link:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(28, 167, 236, 0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-10px) rotate(5deg);
+            box-shadow: var(--neon-hover);
+        }
+        
+        .social-link:hover:before {
+            left: 100%;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 24, 0.95);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(28, 167, 236, 0.3);
+        }
+        
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--electric-blue);
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .footer-logo img {
+            height: 25px;
+            margin-right: 10px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .ps-container {
+                flex-direction: column;
+            }
+            
+            .founder-content {
+                flex-direction: column;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--dark-bg);
+                padding: 1rem;
+                gap: 1rem;
+                flex-direction: column;
+                z-index: 1000;
+            }
+            
+            .nav-active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <img src="logo.png" alt="JamStep">
+                    JamStep
+                </a>
+                <div class="nav-links">
+                    <a href="#home">HOME</a>
+                    <a href="#problem-solution">PROBLEM & SOLUTION</a>
+                    <a href="#advantages">ADVANTAGES</a>
+                    <a href="#founder">FOUNDER</a>
+                    <a href="#whitepaper">WHITEPAPER</a>
+                    <a href="#tokenomics">TOKENOMICS</a>
+                    <a href="#roadmap">ROADMAP</a>
+                    <a href="#contact">CONTACT</a>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>MOVE-TO-EARN <span class="hero-highlight">REINVENTED</span></h1>
+                <p>Transform your steps into crypto rewards with JamStep. Earn JAMP tokens through verified physical activity on BNB Smart Chain.</p>
+                <div>
+                    <a href="#whitepaper" class="btn">WHITEPAPER SUMMARY</a>
+                    <a href="#contact" class="btn">JOIN PRE-LAUNCH</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem & Solution Section -->
+    <section class="problem-solution" id="problem-solution">
+        <div class="container">
+            <h2 class="section-title">THE CHALLENGE & OUR SOLUTION</h2>
+            <div class="ps-container">
+                <div class="problem">
+                    <h2><i class="fas fa-exclamation-triangle"></i> THE PROBLEM</h2>
+                    <p>People lack motivation to stay active. Fitness apps don't adequately reward physical effort, and cryptocurrency remains too complex for mainstream adoption. This creates a gap where potential users are neither sufficiently motivated to exercise nor incentivized to engage with crypto ecosystems.</p>
+                </div>
+                
+                <div class="solution">
+                    <h2><i class="fas fa-lightbulb"></i> OUR SOLUTION</h2>
+                    <p>JamStep bridges fitness and blockchain by rewarding real physical activity with JAMP tokens. Our platform transforms every step into tangible crypto rewards, creating a simple yet powerful incentive system. With anti-cheat measures ensuring fairness, we make crypto accessible while promoting a healthier lifestyle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section class="advantages" id="advantages">
+        <div class="container">
+            <h2 class="section-title">JAMSTEP ADVANTAGES</h2>
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-walking"></i>
+                    </div>
+                    <h3>No NFTs Required</h3>
+                    <p>Start earning immediately without upfront NFT purchases. Our free-to-play model makes crypto rewards accessible to everyone.</p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Transparent Tokenomics</h3>
+                    <p>Clear, sustainable economic model with predefined reward allocation and burn mechanisms to ensure long-term value.</p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Reward Seasons</h3>
+                    <p>Structured seasonal model with increasing benefits and special features to keep the experience fresh and rewarding.</p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3>Premium Features</h3>
+                    <p>Advanced options for dedicated users including increased rewards, exclusive challenges, and special abilities.</p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Built-in Motivation</h3>
+                    <p>Leveling system with milestone rewards and achievement badges to keep you engaged and progressing.</p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Accessibility</h3>
+                    <p>Available on iOS and Android with seamless integration to Apple Health and Google Fit for accurate tracking.</p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h3>Wallet Integration</h3>
+                    <p>Supports popular Web3 wallets like MetaMask and Trust Wallet for easy token management and transfers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder Story -->
+    <section class="founder" id="founder">
+        <div class="container">
+            <h2 class="section-title">FOUNDER</h2>
+            <div class="founder-content">
+                <div class="founder-image">
+                    <img src="founder.png" alt="Jamshid Mavlanov">
+                </div>
+                <div class="founder-text">
+                    <h2>JAMSHID MAVLANOV</h2>
+                    <p>JamStep is a dream I've been building for over a year. After studying failures in the Move-to-Earn space, I've created a sustainable model where physical activity translates to real crypto value.</p>
+                    
+                    <div class="founder-quote">
+                        "This isn't just another crypto project - it's a solution to motivate physical activity through transparent rewards. Your steps become your earning power."
+                    </div>
+                    
+                    <p>Our anti-cheat technology ensures fairness, while multi-season rewards create long-term engagement. I'm building JamStep for those who value real movement over shortcuts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Whitepaper Section -->
+    <section class="whitepaper" id="whitepaper">
+        <div class="container">
+            <h2 class="section-title">WHITEPAPER ESSENTIALS</h2>
+            <div class="data-grid">
+                <div class="data-card">
+                    <h3>2B JAMP</h3>
+                    <p>TOTAL SUPPLY</p>
+                </div>
+                <div class="data-card">
+                    <h3>40%</h3>
+                    <p>USER REWARDS</p>
+                </div>
+                <div class="data-card">
+                    <h3>5% BURN</h3>
+                    <p>QUARTERLY BURN MECHANISM</p>
+                </div>
+                <div class="data-card">
+                    <h3>1.25M</h3>
+                    <p>PREMIUM SLOTS CAP</p>
+                </div>
+            </div>
+            
+            <div class="data-grid">
+                <div class="data-card">
+                    <h3>SEASON 1</h3>
+                    <p>350M JAMP | 0.3 JAMP/DAY CAP</p>
+                </div>
+                <div class="data-card">
+                    <h3>SEASON 2</h3>
+                    <p>250M JAMP | NFT SNEAKERS</p>
+                </div>
+                <div class="data-card">
+                    <h3>SEASON 3</h3>
+                    <p>200M JAMP | GLOBAL EXPANSION</p>
+                </div>
+                <div class="data-card">
+                    <h3>TGE</h3>
+                    <p>OCT 15, 2025</p>
+                </div>
+            </div>
+            
+            <div class="investor-note">
+                <p><strong>For detailed investment documentation:</strong> Contact me directly. This summary contains critical operational parameters only. Full Whitepaper available to serious investors upon request.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tokenomics -->
+    <section class="tokenomics" id="tokenomics">
+        <div class="container">
+            <h2 class="section-title">TOKENOMICS</h2>
+            <div class="chart-container">
+                <div class="chart-wrapper">
+                    <div class="chart-box">
+                        <canvas id="tokenDistribution"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <canvas id="seasonDistribution"></canvas>
+                    </div>
+                </div>
+                <div class="chart-info">
+                    <div class="token-details">
+                        <div class="token-detail">
+                            <div class="color-box" style="background: #1CA7EC;"></div>
+                            <div>
+                                <strong>40% - USER REWARDS</strong>
+                                <p>800M JAMP distributed over 3 seasons</p>
+                            </div>
+                        </div>
+                        <div class="token-detail">
+                            <div class="color-box" style="background: #0E4C92;"></div>
+                            <div>
+                                <strong>20% - INVESTORS</strong>
+                                <p>400M JAMP · 10% TGE, 15% quarterly vesting</p>
+                            </div>
+                        </div>
+                        <div class="token-detail">
+                            <div class="color-box" style="background: #4ECDC4;"></div>
+                            <div>
+                                <strong>20% - RESERVE FUND</strong>
+                                <p>400M JAMP for development and operations</p>
+                            </div>
+                        </div>
+                        <div class="token-detail">
+                            <div class="color-box" style="background: #FF6B6B;"></div>
+                            <div>
+                                <strong>15% - TEAM</strong>
+                                <p>300M JAMP · 2-year vesting</p>
+                            </div>
+                        </div>
+                        <div class="token-detail">
+                            <div class="color-box" style="background: #FFD166;"></div>
+                            <div>
+                                <strong>5% - FOUNDER</strong>
+                                <p>100M JAMP · 5-year vesting</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section class="roadmap" id="roadmap">
+        <div class="container">
+            <h2 class="section-title">ROADMAP</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Q3 2025</span>
+                        <h3>ECOSYSTEM LAUNCH</h3>
+                        <p>• iOS/Android app release<br>
+                        • Season 1 begins<br>
+                        • First 100,000 users<br>
+                        • Private seed round</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">Q4 2025</span>
+                        <h3>TOKEN EXPANSION</h3>
+                        <p>• JAMP token deployment (TGE Oct 15)<br>
+                        • CEX listings<br>
+                        • NFT sneakers integration<br>
+                        • Partnership announcements</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-date">2026</span>
+                        <h3>GLOBAL SCALING</h3>
+                        <p>• DAO governance implementation<br>
+                        • Physical merchandise store<br>
+                        • Asian/European expansion<br>
+                        • Exchange integrations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">CONTACT US</h2>
+            <p>For investment opportunities and strategic partnerships</p>
+            
+            <div class="social-links">
+                <a href="https://t.me/JamStepCrypto" target="_blank" class="social-link">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <a href="https://twitter.com/JamStepOfficial" target="_blank" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://instagram.com/jamstepofficial" target="_blank" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            
+            <div class="contact-info">
+                <p><i class="fas fa-envelope"></i> <a href="mailto:ptrwdoshik@gmail.com">ptrwdoshik@gmail.com</a></p>
+                <p><i class="fab fa-telegram"></i> <a href="https://t.me/JamMav">@JamMav</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <img src="logo.png" alt="JamStep">
+                JamStep
+            </div>
+            <p>© 2025 JamStep. All rights reserved. JAMP is a utility token.</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: #a5b4fc;">
+                Move your body. Earn your rewards.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Security features
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'c' || e.key === 'C')) {
+                e.preventDefault();
+            }
+        });
+        
+        // Mobile Menu
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('nav-active');
+            menuBtn.classList.toggle('active');
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    navLinks.classList.remove('nav-active');
+                }
+            });
+        });
+
+        // Tokenomics Charts
+        const tokenChart = new Chart(
+            document.getElementById('tokenDistribution'),
+            {
+                type: 'doughnut',
+                data: {
+                    labels: ['User Rewards', 'Investors', 'Reserve Fund', 'Team', 'Founder'],
+                    datasets: [{
+                        data: [40, 20, 20, 15, 5],
+                        backgroundColor: [
+                            '#1CA7EC',
+                            '#0E4C92',
+                            '#4ECDC4',
+                            '#FF6B6B',
+                            '#FFD166'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { 
+                            position: 'bottom', 
+                            labels: { 
+                                color: '#fff', 
+                                font: { size: 12 },
+                                padding: 20
+                            } 
+                        },
+                        title: { 
+                            display: true, 
+                            text: 'Token Distribution', 
+                            color: '#1CA7EC',
+                            font: { size: 18, family: 'Orbitron' }
+                        }
+                    },
+                    animation: {
+                        animateRotate: true,
+                        animateScale: true
+                    }
+                }
+            }
+        );
+
+        const seasonChart = new Chart(
+            document.getElementById('seasonDistribution'),
+            {
+                type: 'bar',
+                data: {
+                    labels: ['Season 1', 'Season 2', 'Season 3'],
+                    datasets: [{
+                        label: 'JAMP Allocation (Millions)',
+                        data: [350, 250, 200],
+                        backgroundColor: '#1CA7EC',
+                        borderWidth: 0,
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#c7d2fe' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#c7d2fe' },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        title: { 
+                            display: true, 
+                            text: 'Rewards by Season', 
+                            color: '#1CA7EC',
+                            font: { size: 18, family: 'Orbitron' }
+                        }
+                    },
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            }
+        );
+
+        // Scroll animations
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.problem, .solution, .advantage-card, .data-card, .timeline-content, .chart-box');
+            
+            elements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    el.style.opacity = 1;
+                    el.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // Initialize elements
+        document.querySelectorAll('.problem, .solution, .advantage-card, .data-card, .timeline-content, .chart-box').forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)';
+        });
+
+        // Initial check
+        animateOnScroll();
+        
+        // Listen for scroll
+        window.addEventListener('scroll', animateOnScroll);
+
+        // Button animations
+        const buttons = document.querySelectorAll('.btn, .social-link');
+        buttons.forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.style.transform = 'scale(0.95)';
+            });
+            
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = '';
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = '';
+            });
+        });
+    </script>
+</body>
+</html>
