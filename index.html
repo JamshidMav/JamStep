@@ -547,6 +547,21 @@
             box-shadow: var(--neon-glow);
         }
         
+        .token-impact {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background: rgba(28, 167, 236, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.1rem;
+            border-left: 3px solid var(--electric-blue);
+        }
+        
+        .token-impact strong {
+            color: var(--electric-blue);
+        }
+        
         /* Contact */
         .contact {
             padding: 8rem 0;
@@ -622,6 +637,15 @@
         .footer-logo img {
             height: 25px;
             margin-right: 10px;
+        }
+        
+        .disclaimer {
+            max-width: 800px;
+            margin: 2rem auto 0;
+            padding: 1rem;
+            font-size: 0.85rem;
+            color: #a5b4fc;
+            border-top: 1px solid rgba(28, 167, 236, 0.2);
         }
         
         /* Responsive */
@@ -812,7 +836,7 @@
     <!-- Founder Story -->
     <section class="founder" id="founder">
         <div class="container">
-            <h2 class="section-title">FOUNDER</h2>
+            <h2 class="section-title">THE FOUNDER</h2>
             <div class="founder-content">
                 <div class="founder-image">
                     <img src="founder.png" alt="Jamshid Mavlanov">
@@ -868,8 +892,8 @@
                     <p>200M JAMP | GLOBAL EXPANSION</p>
                 </div>
                 <div class="data-card">
-                    <h3>TGE</h3>
-                    <p>OCT 15, 2025</p>
+                    <h3>LIMITED EMISSION</h3>
+                    <p>Controls token value</p>
                 </div>
             </div>
             
@@ -932,6 +956,10 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="token-impact">
+                <p><strong>Limited emission controls directly impact token value:</strong> Our capped reward system and quarterly burn mechanism create scarcity, supporting long-term price appreciation and token stability.</p>
+            </div>
         </div>
     </section>
 
@@ -954,7 +982,7 @@
                     <div class="timeline-content">
                         <span class="timeline-date">Q4 2025</span>
                         <h3>TOKEN EXPANSION</h3>
-                        <p>• JAMP token deployment (TGE Oct 15)<br>
+                        <p>• JAMP token deployment<br>
                         • CEX listings<br>
                         • NFT sneakers integration<br>
                         • Partnership announcements</p>
@@ -1007,9 +1035,10 @@
                 JamStep
             </div>
             <p>© 2025 JamStep. All rights reserved. JAMP is a utility token.</p>
-            <p style="margin-top: 1rem; font-size: 0.9rem; color: #a5b4fc;">
-                Move your body. Earn your rewards.
-            </p>
+            
+            <div class="disclaimer">
+                <p>This website is for informational purposes only. It does not constitute financial advice, an offer to sell, or a solicitation of an offer to buy any securities. The content is provided "as is" without any warranties.</p>
+            </div>
         </div>
     </footer>
 
