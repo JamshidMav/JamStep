@@ -11,6 +11,8 @@
         :root {
             --dark-bg: #0a0a18;
             --electric-blue: #1CA7EC;
+            --neon-green: #00ff88;
+            --neon-purple: #8b5cf6;
             --neon-glow: 0 0 10px rgba(28, 167, 236, 0.3);
             --neon-hover: 0 0 15px rgba(28, 167, 236, 0.6);
         }
@@ -46,7 +48,7 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(28, 167, 236, 0.3);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.3);
             backdrop-filter: blur(10px);
         }
         
@@ -60,11 +62,12 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--electric-blue);
+            color: var(--neon-green);
             text-transform: uppercase;
             letter-spacing: 2px;
             display: flex;
             align-items: center;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
         }
         
         .logo img {
@@ -100,7 +103,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--electric-blue);
+            background: var(--neon-green);
             transition: width 0.3s ease;
         }
         
@@ -124,10 +127,10 @@
         
         /* Hero Section */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            background: radial-gradient(circle at center, rgba(28, 167, 236, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle at center, rgba(0, 255, 136, 0.08) 0%, transparent 70%);
             padding-top: 80px;
             position: relative;
             overflow: hidden;
@@ -148,18 +151,18 @@
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
             line-height: 1.1;
-            text-shadow: var(--neon-glow);
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
         }
         
         .hero-highlight {
-            color: var(--electric-blue);
+            color: var(--neon-green);
             animation: pulse 2s infinite;
         }
         
         @keyframes pulse {
-            0% { text-shadow: 0 0 10px rgba(28, 167, 236, 0.5); }
-            50% { text-shadow: 0 0 20px rgba(28, 167, 236, 0.8); }
-            100% { text-shadow: 0 0 10px rgba(28, 167, 236, 0.5); }
+            0% { text-shadow: 0 0 10px rgba(0, 255, 136, 0.5); }
+            50% { text-shadow: 0 0 30px rgba(0, 255, 136, 0.8); }
+            100% { text-shadow: 0 0 10px rgba(0, 255, 136, 0.5); }
         }
         
         .hero p {
@@ -167,6 +170,12 @@
             margin-bottom: 2rem;
             max-width: 90%;
             color: #c7d2fe;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
         }
         
         .btn {
@@ -180,8 +189,8 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: all 0.3s;
-            border: 2px solid var(--electric-blue);
-            box-shadow: var(--neon-glow);
+            border: 2px solid var(--neon-green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
             margin-right: 15px;
             font-size: 0.9rem;
             position: relative;
@@ -195,22 +204,64 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(28, 167, 236, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.3), transparent);
             transition: 0.5s;
         }
         
         .btn:hover {
-            background: rgba(28, 167, 236, 0.15);
+            background: rgba(0, 255, 136, 0.15);
             transform: translateY(-3px);
-            box-shadow: var(--neon-hover);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
         }
         
         .btn:hover:before {
             left: 100%;
         }
         
+        .btn-primary {
+            background: linear-gradient(135deg, var(--neon-green), var(--neon-purple));
+            border-color: transparent;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--neon-green), var(--neon-purple));
+            opacity: 0.85;
+        }
+        
         .btn:active {
-            transform: translateY(1px);
+            transform: scale(0.95);
+        }
+        
+        /* Live Stats Bar */
+        .live-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+            padding: 20px 30px;
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--neon-green);
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
         }
         
         /* Problem & Solution Section */
@@ -232,26 +283,28 @@
         }
         
         .problem {
-            background: rgba(255, 100, 100, 0.1);
+            background: rgba(255, 100, 100, 0.08);
             border: 1px solid rgba(255, 100, 100, 0.3);
         }
         
         .solution {
-            background: rgba(100, 255, 100, 0.1);
-            border: 1px solid rgba(100, 255, 100, 0.3);
+            background: rgba(0, 255, 136, 0.08);
+            border: 1px solid rgba(0, 255, 136, 0.3);
         }
         
         .problem:hover, .solution:hover {
             transform: translateY(-10px);
-            box-shadow: var(--neon-glow);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.15);
         }
         
         .problem h2, .solution h2 {
             font-family: 'Orbitron', sans-serif;
             font-size: 2rem;
             margin-bottom: 1.5rem;
-            color: var(--electric-blue);
         }
+        
+        .problem h2 { color: #ff6b6b; }
+        .solution h2 { color: var(--neon-green); }
         
         .problem h2 i, .solution h2 i {
             margin-right: 10px;
@@ -270,8 +323,8 @@
         }
         
         .advantage-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(28, 167, 236, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 255, 136, 0.15);
             border-radius: 8px;
             padding: 2rem;
             text-align: center;
@@ -280,13 +333,13 @@
         
         .advantage-card:hover {
             transform: translateY(-10px);
-            border-color: var(--electric-blue);
-            box-shadow: var(--neon-glow);
+            border-color: var(--neon-green);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.15);
         }
         
         .advantage-icon {
             font-size: 3rem;
-            color: var(--electric-blue);
+            color: var(--neon-green);
             margin-bottom: 1.5rem;
             transition: transform 0.3s ease;
         }
@@ -315,16 +368,16 @@
         
         .founder-image {
             flex: 1;
-            border: 3px solid var(--electric-blue);
+            border: 3px solid var(--neon-green);
             border-radius: 8px;
             overflow: hidden;
             transition: all 0.4s ease;
-            box-shadow: var(--neon-glow);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
         }
         
         .founder-image:hover {
             transform: scale(1.03);
-            box-shadow: var(--neon-hover);
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.4);
         }
         
         .founder-image img {
@@ -342,7 +395,7 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            color: var(--electric-blue);
+            color: var(--neon-green);
         }
         
         .founder-text p {
@@ -352,7 +405,7 @@
         }
         
         .founder-quote {
-            border-left: 3px solid var(--electric-blue);
+            border-left: 3px solid var(--neon-green);
             padding-left: 1.5rem;
             margin: 2rem 0;
             font-style: italic;
@@ -366,16 +419,11 @@
             top: -20px;
             left: -10px;
             font-size: 4rem;
-            color: rgba(28, 167, 236, 0.2);
+            color: rgba(0, 255, 136, 0.15);
             font-family: serif;
         }
         
-        /* Whitepaper Section */
-        .whitepaper {
-            padding: 8rem 0;
-            background: rgba(255, 255, 255, 0.03);
-        }
-        
+        /* Section Title */
         .section-title {
             text-align: center;
             font-family: 'Orbitron', sans-serif;
@@ -384,6 +432,8 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             position: relative;
+            color: var(--neon-green);
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
         }
         
         .section-title:after {
@@ -394,7 +444,14 @@
             transform: translateX(-50%);
             width: 80px;
             height: 4px;
-            background: var(--electric-blue);
+            background: var(--neon-green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+        }
+        
+        /* Whitepaper Section */
+        .whitepaper {
+            padding: 8rem 0;
+            background: rgba(255, 255, 255, 0.03);
         }
         
         .data-grid {
@@ -405,8 +462,8 @@
         }
         
         .data-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(28, 167, 236, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 255, 136, 0.15);
             border-radius: 8px;
             padding: 2rem;
             text-align: center;
@@ -415,32 +472,33 @@
         
         .data-card:hover {
             transform: translateY(-10px);
-            border-color: var(--electric-blue);
-            box-shadow: var(--neon-glow);
+            border-color: var(--neon-green);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.15);
         }
         
         .data-card h3 {
             font-size: 1.8rem;
-            color: var(--electric-blue);
+            color: var(--neon-green);
             margin-bottom: 1rem;
             font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
         }
         
         .investor-note {
             max-width: 800px;
             margin: 3rem auto;
             padding: 1.5rem;
-            background: rgba(28, 167, 236, 0.1);
+            background: rgba(0, 255, 136, 0.05);
             border-radius: 8px;
             text-align: center;
             font-size: 1.1rem;
-            border-left: 3px solid var(--electric-blue);
+            border-left: 3px solid var(--neon-green);
             transition: all 0.4s ease;
         }
         
         .investor-note:hover {
             transform: scale(1.02);
-            box-shadow: var(--neon-glow);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.15);
         }
         
         /* Tokenomics */
@@ -462,18 +520,82 @@
         }
         
         .chart-box {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             padding: 2rem;
             border-radius: 8px;
             margin-bottom: 2rem;
-            border: 1px solid rgba(28, 167, 236, 0.2);
+            border: 1px solid rgba(0, 255, 136, 0.15);
             transition: all 0.4s ease;
         }
         
         .chart-box:hover {
             transform: translateY(-5px);
-            border-color: var(--electric-blue);
-            box-shadow: var(--neon-glow);
+            border-color: var(--neon-green);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.15);
+        }
+        
+        .chart-box canvas {
+            max-height: 300px;
+        }
+        
+        /* What's New Section */
+        .changelog-section {
+            padding: 8rem 0;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .changelog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .changelog-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+        
+        .changelog-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-green);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.15);
+        }
+        
+        .changelog-card .version {
+            color: var(--neon-green);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .changelog-card .date {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 1rem;
+        }
+        
+        .changelog-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .changelog-card ul li {
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+        }
+        
+        .changelog-card ul li:before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--neon-green);
         }
         
         /* Roadmap */
@@ -492,12 +614,13 @@
             content: '';
             position: absolute;
             width: 4px;
-            background: linear-gradient(to bottom, var(--electric-blue), transparent);
+            background: linear-gradient(to bottom, var(--neon-green), transparent);
             top: 0;
             bottom: 0;
             left: 50%;
             margin-left: -2px;
             border-radius: 2px;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
         }
         
         .timeline-item {
@@ -515,28 +638,28 @@
         }
         
         .timeline-content {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             padding: 2rem;
             border-radius: 8px;
             position: relative;
-            border: 1px solid rgba(28, 167, 236, 0.2);
+            border: 1px solid rgba(0, 255, 136, 0.15);
             transition: all 0.4s ease;
         }
         
         .timeline-content:hover {
             transform: translateX(10px);
-            border-color: var(--electric-blue);
-            box-shadow: var(--neon-glow);
+            border-color: var(--neon-green);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.15);
         }
         
         .timeline-content h3 {
-            color: var(--electric-blue);
+            color: var(--neon-green);
             margin-bottom: 0.8rem;
             font-family: 'Orbitron', sans-serif;
         }
         
         .timeline-date {
-            background: var(--electric-blue);
+            background: linear-gradient(135deg, var(--neon-green), var(--neon-purple));
             color: white;
             padding: 0.3rem 1.5rem;
             border-radius: 4px;
@@ -544,22 +667,100 @@
             margin-bottom: 1rem;
             font-weight: 700;
             font-size: 0.9rem;
-            box-shadow: var(--neon-glow);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
         }
         
-        .token-impact {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1.5rem;
-            background: rgba(28, 167, 236, 0.1);
-            border-radius: 8px;
+        .timeline-content p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+        }
+        
+        /* TGE Countdown */
+        .tge-countdown {
             text-align: center;
-            font-size: 1.1rem;
-            border-left: 3px solid var(--electric-blue);
+            padding: 40px 0;
+            background: rgba(0, 255, 136, 0.03);
+            border-top: 1px solid rgba(0, 255, 136, 0.1);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
         }
         
-        .token-impact strong {
-            color: var(--electric-blue);
+        .tge-countdown h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-green);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+        }
+        
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-item {
+            text-align: center;
+        }
+        
+        .countdown-item .number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--neon-green);
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+        }
+        
+        .countdown-item .label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        /* Demo Video */
+        .demo-section {
+            padding: 8rem 0;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .demo-container {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            box-shadow: 0 0 40px rgba(0, 255, 136, 0.15);
+            transition: all 0.4s ease;
+        }
+        
+        .demo-container:hover {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 60px rgba(0, 255, 136, 0.3);
+        }
+        
+        .demo-container video,
+        .demo-container img {
+            width: 100%;
+            display: block;
+        }
+        
+        .demo-placeholder {
+            background: rgba(0, 255, 136, 0.05);
+            padding: 80px 20px;
+            text-align: center;
+            color: rgba(255,255,255,0.3);
+        }
+        
+        .demo-placeholder i {
+            font-size: 4rem;
+            color: var(--neon-green);
+            opacity: 0.3;
+            margin-bottom: 15px;
+        }
+        
+        .demo-placeholder p {
+            font-size: 1.1rem;
         }
         
         /* Contact */
@@ -588,8 +789,8 @@
             font-size: 1.8rem;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-decoration: none;
-            border: 2px solid var(--electric-blue);
-            box-shadow: var(--neon-glow);
+            border: 2px solid var(--neon-green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.15);
             position: relative;
             overflow: hidden;
         }
@@ -601,17 +802,37 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(28, 167, 236, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.2), transparent);
             transition: 0.5s;
         }
         
         .social-link:hover {
             transform: translateY(-10px) rotate(5deg);
-            box-shadow: var(--neon-hover);
+            box-shadow: 0 0 40px rgba(0, 255, 136, 0.3);
+            border-color: var(--neon-purple);
         }
         
         .social-link:hover:before {
             left: 100%;
+        }
+        
+        .contact-info {
+            margin-top: 2rem;
+        }
+        
+        .contact-info p {
+            margin: 8px 0;
+            font-size: 1.1rem;
+        }
+        
+        .contact-info a {
+            color: var(--neon-green);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-info a:hover {
+            color: var(--neon-purple);
         }
         
         /* Footer */
@@ -619,14 +840,14 @@
             background: rgba(10, 10, 24, 0.95);
             padding: 3rem 0;
             text-align: center;
-            border-top: 1px solid rgba(28, 167, 236, 0.3);
+            border-top: 1px solid rgba(0, 255, 136, 0.15);
         }
         
         .footer-logo {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.2rem;
             font-weight: 700;
-            color: var(--electric-blue);
+            color: var(--neon-green);
             letter-spacing: 2px;
             margin-bottom: 1rem;
             display: inline-flex;
@@ -639,13 +860,32 @@
             margin-right: 10px;
         }
         
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--neon-green);
+        }
+        
         .disclaimer {
             max-width: 800px;
             margin: 2rem auto 0;
             padding: 1rem;
             font-size: 0.85rem;
-            color: #a5b4fc;
-            border-top: 1px solid rgba(28, 167, 236, 0.2);
+            color: rgba(255,255,255,0.3);
+            border-top: 1px solid rgba(0, 255, 136, 0.1);
         }
         
         /* Responsive */
@@ -671,6 +911,19 @@
             .timeline-item:nth-child(even) {
                 left: 0;
             }
+            
+            .live-stats {
+                gap: 20px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .btn {
+                margin-right: 0;
+            }
         }
         
         @media (max-width: 768px) {
@@ -685,6 +938,7 @@
                 gap: 1rem;
                 flex-direction: column;
                 z-index: 1000;
+                border-bottom: 1px solid rgba(0, 255, 136, 0.15);
             }
             
             .nav-active {
@@ -699,14 +953,24 @@
                 font-size: 2.3rem;
             }
             
-            .btn {
-                display: block;
-                width: 100%;
-                margin-bottom: 1rem;
+            .section-title {
+                font-size: 1.8rem;
             }
             
-            .section-title {
+            .stat-number {
+                font-size: 1.6rem;
+            }
+            
+            .countdown-item .number {
                 font-size: 2rem;
+            }
+            
+            .countdown-timer {
+                gap: 15px;
+            }
+            
+            .live-stats {
+                padding: 15px;
             }
         }
     </style>
@@ -717,7 +981,7 @@
         <div class="container">
             <nav>
                 <a href="#" class="logo">
-                    <img src="logo.png" alt="JamStep">
+                    <img src="logo.png" alt="JamStep" onerror="this.style.display='none'">
                     JamStep
                 </a>
                 <div class="nav-links">
@@ -743,9 +1007,26 @@
             <div class="hero-content">
                 <h1>MOVE-TO-EARN <span class="hero-highlight">REINVENTED</span></h1>
                 <p>Transform your steps into crypto rewards with JamStep. Earn JAMP tokens through verified physical activity on BNB Smart Chain.</p>
-                <div>
-                    <a href="#whitepaper" class="btn">WHITEPAPER SUMMARY</a>
-                    <a href="#contact" class="btn">JOIN PRE-LAUNCH</a>
+                <div class="hero-buttons">
+                    <a href="#demo" class="btn btn-primary">🎬 TRY DEMO</a>
+                    <a href="#whitepaper" class="btn">WHITEPAPER</a>
+                    <a href="#contact" class="btn">CONTACT</a>
+                </div>
+                
+                <!-- Live Stats -->
+                <div class="live-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="userCounter">0</div>
+                        <div class="stat-label">👥 Active Users</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="tgeTimer">--</div>
+                        <div class="stat-label">⏳ Until TGE</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">$550K</div>
+                        <div class="stat-label">💰 Pre-Seed Round</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -839,7 +1120,7 @@
             <h2 class="section-title">THE FOUNDER</h2>
             <div class="founder-content">
                 <div class="founder-image">
-                    <img src="founder.png" alt="Jamshid Mavlanov">
+                    <img src="founder.png" alt="Jamshid Mavlanov" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect fill=%22%231a1a2e%22 width=%22400%22 height=%22400%22/%3E%3Ctext x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%2300ff88%22 font-family=%22Arial%22 font-size=%2240%22%3E👤%3C/text%3E%3C/svg%3E'">
                 </div>
                 <div class="founder-text">
                     <h2>JAMSHID MAVLANOV</h2>
@@ -873,8 +1154,8 @@
                     <p>QUARTERLY BURN MECHANISM</p>
                 </div>
                 <div class="data-card">
-                    <h3>1.25M</h3>
-                    <p>PREMIUM SLOTS CAP</p>
+                    <h3>5 LEVELS</h3>
+                    <p>RECRUIT → LEGEND</p>
                 </div>
             </div>
             
@@ -916,49 +1197,75 @@
                         <canvas id="seasonDistribution"></canvas>
                     </div>
                 </div>
-                <div class="chart-info">
-                    <div class="token-details">
-                        <div class="token-detail">
-                            <div class="color-box" style="background: #1CA7EC;"></div>
-                            <div>
-                                <strong>40% - USER REWARDS</strong>
-                                <p>800M JAMP distributed over 3 seasons</p>
-                            </div>
-                        </div>
-                        <div class="token-detail">
-                            <div class="color-box" style="background: #0E4C92;"></div>
-                            <div>
-                                <strong>20% - INVESTORS</strong>
-                                <p>400M JAMP · 10% TGE, 15% quarterly vesting</p>
-                            </div>
-                        </div>
-                        <div class="token-detail">
-                            <div class="color-box" style="background: #4ECDC4;"></div>
-                            <div>
-                                <strong>20% - RESERVE FUND</strong>
-                                <p>400M JAMP for development and operations</p>
-                            </div>
-                        </div>
-                        <div class="token-detail">
-                            <div class="color-box" style="background: #FF6B6B;"></div>
-                            <div>
-                                <strong>15% - TEAM</strong>
-                                <p>300M JAMP · 2-year vesting</p>
-                            </div>
-                        </div>
-                        <div class="token-detail">
-                            <div class="color-box" style="background: #FFD166;"></div>
-                            <div>
-                                <strong>5% - FOUNDER</strong>
-                                <p>100M JAMP · 5-year vesting</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             
             <div class="token-impact">
                 <p><strong>Limited emission controls directly impact token value:</strong> Our capped reward system and quarterly burn mechanism create scarcity, supporting long-term price appreciation and token stability.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's New Section -->
+    <section class="changelog-section" id="changelog">
+        <div class="container">
+            <h2 class="section-title">📋 WHAT'S NEW</h2>
+            <div class="changelog-grid">
+                <div class="changelog-card">
+                    <div class="version">🚀 v1.2 — June 2026</div>
+                    <div class="date">Latest Update</div>
+                    <ul>
+                        <li>Step animations (👟 🏃‍♂️ ⚡ 🏆)</li>
+                        <li>5-level system (RECRUIT → LEGEND)</li>
+                        <li>Level drops after 3 days of inactivity</li>
+                        <li>User registration counter in profile</li>
+                        <li>Total JAMP earned displayed</li>
+                        <li>Project days counter</li>
+                        <li>Sound effects (clicks & victory)</li>
+                        <li>UI refresh with neon effects</li>
+                    </ul>
+                </div>
+                
+                <div class="changelog-card">
+                    <div class="version">🔄 v1.1 — May 2026</div>
+                    <div class="date">Initial Launch</div>
+                    <ul>
+                        <li>Telegram Mini App launch</li>
+                        <li>4 step levels (500, 1000, 5000, 10000)</li>
+                        <li>JAMP token rewards system</li>
+                        <li>Stamina system (5 energy)</li>
+                        <li>Daily limit (10,000 steps)</li>
+                    </ul>
+                </div>
+                
+                <div class="changelog-card">
+                    <div class="version">🏁 v1.0 — April 2026</div>
+                    <div class="date">Beta Launch</div>
+                    <ul>
+                        <li>First beta testers onboarded</li>
+                        <li>Google Sheets logging implemented</li>
+                        <li>MVP testing phase completed</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo-section" id="demo">
+        <div class="container">
+            <h2 class="section-title">🎬 LIVE DEMO</h2>
+            <div class="demo-container" id="demoContainer">
+                <!-- Video will be displayed here when uploaded -->
+                <div class="demo-placeholder" id="demoPlaceholder">
+                    <i class="fas fa-play-circle"></i>
+                    <p>Demo video coming soon!<br>Check out our Telegram Mini App</p>
+                    <a href="https://t.me/JamStepCrypto" target="_blank" class="btn" style="margin-top: 15px; display: inline-block;">📱 Try Mini App</a>
+                </div>
+                <!-- Video element (hidden until uploaded) -->
+                <video id="demoVideo" style="display:none; width:100%;" controls autoplay muted loop>
+                    <source src="demo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
         </div>
     </section>
@@ -1002,11 +1309,37 @@
         </div>
     </section>
 
+    <!-- TGE Countdown -->
+    <section class="tge-countdown" id="tge">
+        <div class="container">
+            <h3>⏳ TOKEN GENERATION EVENT</h3>
+            <div class="countdown-timer">
+                <div class="countdown-item">
+                    <div class="number" id="days">00</div>
+                    <div class="label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="number" id="hours">00</div>
+                    <div class="label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="number" id="minutes">00</div>
+                    <div class="label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="number" id="seconds">00</div>
+                    <div class="label">Seconds</div>
+                </div>
+            </div>
+            <p style="margin-top: 15px; color: rgba(255,255,255,0.3); font-size: 0.9rem;">Q1 2027 — March 15, 2027</p>
+        </div>
+    </section>
+
     <!-- Contact -->
     <section class="contact" id="contact">
         <div class="container">
             <h2 class="section-title">CONTACT US</h2>
-            <p>For investment opportunities and strategic partnerships</p>
+            <p style="font-size: 1.1rem; color: rgba(255,255,255,0.6);">For investment opportunities and strategic partnerships</p>
             
             <div class="social-links">
                 <a href="https://t.me/JamStepCrypto" target="_blank" class="social-link">
@@ -1021,8 +1354,8 @@
             </div>
             
             <div class="contact-info">
-                <p><i class="fas fa-envelope"></i> <a href="mailto:ptrwdoshik@gmail.com">ptrwdoshik@gmail.com</a></p>
-                <p><i class="fab fa-telegram"></i> <a href="https://t.me/JamMav">@JamMav</a></p>
+                <p><i class="fas fa-envelope" style="color: var(--neon-green);"></i> <a href="mailto:ptrwdoshik@gmail.com">ptrwdoshik@gmail.com</a></p>
+                <p><i class="fab fa-telegram" style="color: var(--neon-green);"></i> <a href="https://t.me/JamMav">@JamMav</a></p>
             </div>
         </div>
     </section>
@@ -1031,10 +1364,16 @@
     <footer>
         <div class="container">
             <div class="footer-logo">
-                <img src="logo.png" alt="JamStep">
+                <img src="logo.png" alt="JamStep" onerror="this.style.display='none'">
                 JamStep
             </div>
-            <p>© 2025 JamStep. All rights reserved. JAMP is a utility token.</p>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#whitepaper">Whitepaper</a>
+                <a href="#roadmap">Roadmap</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <p style="color: rgba(255,255,255,0.3); font-size: 0.9rem;">© 2026 JamStep. All rights reserved. JAMP is a utility token.</p>
             
             <div class="disclaimer">
                 <p>This website is for informational purposes only. It does not constitute financial advice, an offer to sell, or a solicitation of an offer to buy any securities. The content is provided "as is" without any warranties.</p>
@@ -1043,7 +1382,9 @@
     </footer>
 
     <script>
-        // Security features
+        // ============================================================
+        // SECURITY
+        // ============================================================
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.addEventListener('keydown', e => {
             if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'c' || e.key === 'C')) {
@@ -1051,7 +1392,9 @@
             }
         });
         
-        // Mobile Menu
+        // ============================================================
+        // MOBILE MENU
+        // ============================================================
         const menuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
         
@@ -1060,24 +1403,111 @@
             menuBtn.classList.toggle('active');
         });
 
-        // Smooth Scrolling
+        // ============================================================
+        // SMOOTH SCROLLING
+        // ============================================================
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     window.scrollTo({
                         top: target.offsetTop - 80,
                         behavior: 'smooth'
                     });
-                    
                     navLinks.classList.remove('nav-active');
                 }
             });
         });
 
-        // Tokenomics Charts
+        // ============================================================
+        // ANIMATED USER COUNTER (0 → 211)
+        // ============================================================
+        function animateCounter(element, target, duration = 2500) {
+            let start = 0;
+            const startTime = performance.now();
+            
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(eased * target);
+                element.textContent = current;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    element.textContent = target;
+                }
+            }
+            
+            requestAnimationFrame(update);
+        }
+        
+        // ============================================================
+        // TGE COUNTDOWN TIMER
+        // ============================================================
+        function startCountdown() {
+            const targetDate = new Date('2027-03-15T00:00:00').getTime();
+            
+            function updateTimer() {
+                const now = new Date().getTime();
+                const diff = targetDate - now;
+                
+                if (diff <= 0) {
+                    document.getElementById('days').textContent = '00';
+                    document.getElementById('hours').textContent = '00';
+                    document.getElementById('minutes').textContent = '00';
+                    document.getElementById('seconds').textContent = '00';
+                    return;
+                }
+                
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            }
+            
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+        
+        // ============================================================
+        // DEMO VIDEO DETECTION
+        // ============================================================
+        function checkDemoVideo() {
+            const video = document.getElementById('demoVideo');
+            const placeholder = document.getElementById('demoPlaceholder');
+            
+            // Try to load video, if fails show placeholder
+            video.addEventListener('error', function() {
+                placeholder.style.display = 'block';
+                video.style.display = 'none';
+            });
+            
+            // If video can load, show it
+            video.addEventListener('loadedmetadata', function() {
+                placeholder.style.display = 'none';
+                video.style.display = 'block';
+            });
+            
+            // Check if video source exists
+            const source = video.querySelector('source');
+            if (source && source.src) {
+                // Try to load
+                video.load();
+            }
+        }
+        
+        // ============================================================
+        // CHARTS
+        // ============================================================
+        // Token Distribution Chart
         const tokenChart = new Chart(
             document.getElementById('tokenDistribution'),
             {
@@ -1086,13 +1516,7 @@
                     labels: ['User Rewards', 'Investors', 'Reserve Fund', 'Team', 'Founder'],
                     datasets: [{
                         data: [40, 20, 20, 15, 5],
-                        backgroundColor: [
-                            '#1CA7EC',
-                            '#0E4C92',
-                            '#4ECDC4',
-                            '#FF6B6B',
-                            '#FFD166'
-                        ],
+                        backgroundColor: ['#00ff88', '#8b5cf6', '#1CA7EC', '#FF6B6B', '#FFD166'],
                         borderWidth: 0
                     }]
                 },
@@ -1110,18 +1534,20 @@
                         title: { 
                             display: true, 
                             text: 'Token Distribution', 
-                            color: '#1CA7EC',
+                            color: '#00ff88',
                             font: { size: 18, family: 'Orbitron' }
                         }
                     },
                     animation: {
                         animateRotate: true,
-                        animateScale: true
+                        animateScale: true,
+                        duration: 2000
                     }
                 }
             }
         );
 
+        // Season Distribution Chart
         const seasonChart = new Chart(
             document.getElementById('seasonDistribution'),
             {
@@ -1131,7 +1557,7 @@
                     datasets: [{
                         label: 'JAMP Allocation (Millions)',
                         data: [350, 250, 200],
-                        backgroundColor: '#1CA7EC',
+                        backgroundColor: ['#00ff88', '#8b5cf6', '#1CA7EC'],
                         borderWidth: 0,
                         borderRadius: 5
                     }]
@@ -1142,7 +1568,7 @@
                         y: {
                             beginAtZero: true,
                             ticks: { color: '#c7d2fe' },
-                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' }
                         },
                         x: {
                             ticks: { color: '#c7d2fe' },
@@ -1154,7 +1580,7 @@
                         title: { 
                             display: true, 
                             text: 'Rewards by Season', 
-                            color: '#1CA7EC',
+                            color: '#00ff88',
                             font: { size: 18, family: 'Orbitron' }
                         }
                     },
@@ -1166,35 +1592,54 @@
             }
         );
 
-        // Scroll animations
+        // ============================================================
+        // SCROLL ANIMATIONS
+        // ============================================================
         const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.problem, .solution, .advantage-card, .data-card, .timeline-content, .chart-box');
+            const elements = document.querySelectorAll('.problem, .solution, .advantage-card, .data-card, .timeline-content, .chart-box, .changelog-card');
             
             elements.forEach(el => {
                 const elementTop = el.getBoundingClientRect().top;
                 const windowHeight = window.innerHeight;
                 
-                if (elementTop < windowHeight - 100) {
-                    el.style.opacity = 1;
+                if (elementTop < windowHeight - 80) {
+                    el.style.opacity = '1';
                     el.style.transform = 'translateY(0)';
                 }
             });
         };
 
-        // Initialize elements
-        document.querySelectorAll('.problem, .solution, .advantage-card, .data-card, .timeline-content, .chart-box').forEach(el => {
-            el.style.opacity = 0;
+        // Initialize elements for scroll animation
+        document.querySelectorAll('.problem, .solution, .advantage-card, .data-card, .timeline-content, .chart-box, .changelog-card').forEach(el => {
+            el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)';
         });
 
-        // Initial check
-        animateOnScroll();
+        // ============================================================
+        // INIT
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate user counter
+            const userCounter = document.getElementById('userCounter');
+            animateCounter(userCounter, 211, 2500);
+            
+            // Start countdown
+            startCountdown();
+            
+            // Check for demo video
+            checkDemoVideo();
+            
+            // Initial scroll animation check
+            setTimeout(animateOnScroll, 500);
+        });
         
         // Listen for scroll
         window.addEventListener('scroll', animateOnScroll);
 
-        // Button animations
+        // ============================================================
+        // BUTTON ANIMATIONS
+        // ============================================================
         const buttons = document.querySelectorAll('.btn, .social-link');
         buttons.forEach(btn => {
             btn.addEventListener('mousedown', () => {
